@@ -36,4 +36,7 @@ Rails.application.configure do
 
   # Allow the API to respond with exceptions in the response json
   config.allow_api_exceptions = true
+
+  # Set the default url options for redirecting from within the dummy app specs.
+  config.action_controller.default_url_options = {host: 'localhost', port: 31337}
 end

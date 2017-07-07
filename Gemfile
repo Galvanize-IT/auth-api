@@ -10,5 +10,6 @@ group :development, :test do
   gem 'vcr'
   gem 'webmock'
   gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
 end

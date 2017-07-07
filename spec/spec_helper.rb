@@ -10,6 +10,7 @@ require 'capybara/rails'
 OmniAuth.config.test_mode = true
 
 RSpec.configure do |config|
+  config.include RSpec::Rails::ViewRendering
   config.order = 'random'
   config.color = true
 end
