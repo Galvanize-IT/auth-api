@@ -1,0 +1,11 @@
+default: &default
+  adapter: sqlite3
+  verbosity: quiet
+
+development:
+  <<: *default
+  database: auth_api_development
+
+test:
+  <<: *default
+  database: auth_api_test
