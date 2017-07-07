@@ -11,7 +11,7 @@ You can build all of the things you may need manually, but this gem includes sev
 gem 'auth-api', github: 'Galvanize-IT/auth-api'
 ```
 
-To get the basic configuration initializer, run the install generator.
+To get the basic configuration initializer and routes, run the install generator.
 
 ```shell
 rails generate auth_api:install
@@ -19,15 +19,21 @@ rails generate auth_api:install
 
 ## Usage
 
-### Sign In / Out (a.k.a Sessions)
+### Configuration
+
+Before you start integrating with Auth, you'll need to register your application within the Galvanize Auth system. To do this talk with a developer, or if you already have access to create an application, do so yourself.
+
+Once you have an application registered, you should be able to configure the `client_id`, `client_secret`, and `webhook_token` in the `auth_api.rb` initializer that was provided in the install generator.
+
+### Sign In / Out
 
 To get the basic authentication logic, you simply need to mount the engine (this happens when you run the install generator).
 
 The configuration comes with some default user find/resolve functionality that's used in the process of signing a user in, but you'll probably want to change or enhance it based on your needs.
 
-To force sign in, just redirect or link the user to `auth_api_engine.new_session_path` if no `current_user` is found. The controller can be easily overridden as well should you need your own functionality.
+To force sign in, just redirect or link the user to `auth_api.new_session_path` if no `current_user` is found. The controller can be easily overridden as well should you need your own functionality.
 
-To sign out provide a link to `auth_api_engine.destroy_session_path`.
+To sign out provide a link to `auth_api.destroy_session_path`.
 
 ### Webhook Constraint
 
