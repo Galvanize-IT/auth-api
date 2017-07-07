@@ -1,4 +1,4 @@
-Auth API
+Auth API [![CircleCI](https://circleci.com/gh/Galvanize-IT/auth-api.svg?style=svg&circle-token=738d6f5d830c1949e753c7243f86fb18f180d6d7)](https://circleci.com/gh/Galvanize-IT/auth-api)
 ========
 
 This gem has the basics required to get started using Auth. 
