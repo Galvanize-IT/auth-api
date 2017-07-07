@@ -1,0 +1,112 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth-staging.galvanize.com/api/oauth/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=client_credentials&client_id=<AUTH_CLIENT_ID>&client_secret=<AUTH_CLIENT_SECRET>&scope=product.read
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - auth-staging.galvanize.com
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 06 Jul 2017 04:39:33 GMT
+      Etag:
+      - W/"279e61f8b3ee89f538e206fbffe6465a"
+      Pragma:
+      - no-cache
+      Server:
+      - nginx/1.8.1 + Phusion Passenger 4.0.60
+      Status:
+      - 200 OK
+      X-Powered-By:
+      - Phusion Passenger 4.0.60
+      X-Request-Id:
+      - 49926979-48d0-4dd2-9f78-8be919f20548
+      X-Runtime:
+      - '0.025948'
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJHYWx2YW5pemUiLCJpYXQiOjE0OTkzMTU5NzMsImp0aSI6IjBhY2M1ZjQ5NDBjYmU2MWY4YzI3NTFiOTdjY2MwODMyIiwiZXhwIjoxNDk5MzIzMTczfQ.7w19bQL4_pQRw1KLigeQknx5RKYX_kBorAEoOotZAuJMTSc4QAYqJwjiDpRcUpjO5c4RlwA1g35I_Fhy2KBfwA","token_type":"bearer","expires_in":7200,"scope":"product.read","created_at":1499315973}'
+    http_version: 
+  recorded_at: Thu, 06 Jul 2017 04:39:33 GMT
+- request:
+    method: get
+    uri: https://auth-staging.galvanize.com/api/v1/products/abc123
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJHYWx2YW5pemUiLCJpYXQiOjE0OTkzMTU5NzMsImp0aSI6IjBhY2M1ZjQ5NDBjYmU2MWY4YzI3NTFiOTdjY2MwODMyIiwiZXhwIjoxNDk5MzIzMTczfQ.7w19bQL4_pQRw1KLigeQknx5RKYX_kBorAEoOotZAuJMTSc4QAYqJwjiDpRcUpjO5c4RlwA1g35I_Fhy2KBfwA
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 06 Jul 2017 04:39:33 GMT
+      Etag:
+      - W/"15c046a936da762fd9df7464a4e56e16"
+      Server:
+      - nginx/1.8.1 + Phusion Passenger 4.0.60
+      Status:
+      - 200 OK
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Powered-By:
+      - Phusion Passenger 4.0.60
+      X-Request-Id:
+      - 2ce6b3c4-9f4f-48e9-9316-7ff334136d26
+      X-Runtime:
+      - '0.012037'
+      X-Xss-Protection:
+      - 1; mode=block
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":"21","type":"products","attributes":{"uid":"abc123","name":"Web
+        Development","slug":"web-development-13123123","title":"Martha''s Coolio Party
+        Cohort","product_type":"24 Week Full-Time Immersive","label":"17-89-WD-DG","gcode":"g555WD","campus_name":"Denver-Golden
+        Triangle","slack_channel":null,"starts_on":"2017-10-27T00:00:00.000-06:00","ends_on":"2018-03-29T00:00:00.000-06:00"}}}'
+    http_version: 
+  recorded_at: Thu, 06 Jul 2017 04:39:33 GMT
+recorded_with: VCR 3.0.3

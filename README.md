@@ -41,3 +41,16 @@ constraints AuthApi::WebhookConstraint do
 end
 ```
 
+### API Interface
+
+```ruby
+client = AuthApi::Client.new
+
+product = client.product_details(uid: 'abc123')
+product.title # => 'Web Development'
+
+users = client.user_search(terms: 'jejacks0n')
+users.count # => 1 
+users.first.first_name # => Jeremy
+users.first.products # => [AuthApi::Product]
+```

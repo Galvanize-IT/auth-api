@@ -1,7 +1,7 @@
 AuthApi.configure do |config|
 
   # Different environments can use different Auth urls.
-  config.url = 'http://auth.dev'
+  config.url = 'https://auth-staging.galvanize.com'
 
   # Provide the Client ID, Secret, and Webhook Token as provided through the Auth application interface.
   config.client_id = ''
