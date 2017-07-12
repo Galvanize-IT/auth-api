@@ -9,19 +9,19 @@ AuthApi.configure do |config|
   config.webhook_token = ''
 
   # The user lookup based on uid. Provide a block that will return the user that's been resolved.
-  config.user_finder do |uid|
+  config.define_user_finder do |uid|
     User.find_by(uid: uid)
   end
 
   # When a session is being created, we can find or create a user. This doesn't need to create a user however,
   # so implement what makes sense -- if no user is returned, an AuthApi::UserResolutionError is raised which
   # can be handled in your application controller.
-  config.user_resolver do |auth|
+  config.define_user_resolver do |auth_user|
     # Pull only the attributes we want.
-    attrs = data.info.attributes.without(*(data.info.attributes.keys - User.new.attributes.keys))
+    attrs = auth_user.attribute_intersection(User.new.attributes.keys)
 
     # Find the user or create a new one (the creating of one is totally optional).
-    user = User.find_by(uid: data.uid) || User.new(attrs)
+    user = User.find_by(uid: auth_user.uid) || User.new(attrs)
 
     # We update the last time we saw them, but...
     # 1. You may want to pull in data like what products they've registered for, etc.
