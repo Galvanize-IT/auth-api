@@ -5,7 +5,7 @@ AuthApi.configure do |config|
 
   # Provide the Client ID, Secret, and Webhook Token as provided through the Auth application interface.
   config.client_id = ''
-  config.secret = ''
+  config.client_secret = ''
   config.webhook_token = ''
 
   # The user lookup based on uid. Provide a block that will return the user that's been resolved.
