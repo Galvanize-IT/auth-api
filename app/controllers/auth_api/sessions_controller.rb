@@ -2,7 +2,7 @@ module AuthApi
   class SessionsController < ApplicationController
     def new
       # Redirect back to root if signed in, otherwise kick off the defined omniauth strategy.
-      redirect_to current_user ? main_app.root_path : '/auth/galvanize'
+      redirect_to current_user ? main_app.root_path : "/auth/#{AuthApi.configuration.strategy_name}"
     end
 
     def setup
@@ -14,7 +14,8 @@ module AuthApi
     def create
       # Find and/or optionally create your user.
       auth = request.env['omniauth.auth']
-      user = AuthApi.configuration.user_resolver.call(Resource::Base.resolve_resources(auth.info)) if auth.info.data
+      resource = Resource::Base.resolve_resources(auth.info) if auth.info.data
+      user = AuthApi.configuration.user_resolver.call(resource) unless resource.empty?
       raise AuthApi::UserResolutionError unless user&.persisted?
 
       # Reset the session and assign the users uid to the clean session.

@@ -8,6 +8,9 @@ AuthApi.configure do |config|
   config.client_secret = ''
   config.webhook_token = ''
 
+  # The name of the auth strategy the app will hit upon returning from Gauth. Defaulted to 'galvanize_auth' below.
+  config.strategy_name = 'galvanize_auth'
+
   # The user lookup based on uid. Provide a block that will return the user that's been resolved.
   config.define_user_finder do |uid|
     User.find_by(uid: uid)
