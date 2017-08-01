@@ -35,7 +35,10 @@ describe "Registering", type: :feature do
   it "raises a user resolution error if auth is completely broken for some reason" do
     visit(root_path)
 
-    expect{ click_link 'Sign In' }.to raise_error(AuthApi::UserResolutionError)
+    click_link 'Sign In'
+
+    expect(page).to have_link 'Sign In', href: '/sign_in'
+    expect(page).to have_content 'We were unable to find or create a user based on your credentials'
   end
 
 end

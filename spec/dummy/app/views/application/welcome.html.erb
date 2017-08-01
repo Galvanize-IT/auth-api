@@ -4,6 +4,7 @@
       <p>Welcome <%= current_user.first_name %>, you're signed in.</p>
       <p><%= link_to('Sign Out', auth_api.destroy_session_path) %>
     <% else %>
+      <p><%= flash[:alert] %></p>
       <p><%= link_to('Sign In', auth_api.new_session_path) %>
     <% end %>
   </body>

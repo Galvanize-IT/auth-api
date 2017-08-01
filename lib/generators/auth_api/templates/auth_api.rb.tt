@@ -11,6 +11,9 @@ AuthApi.configure do |config|
   # The name of the auth strategy the app will hit upon returning from Gauth. Defaulted to 'galvanize_auth' below.
   config.strategy_name = 'galvanize_auth'
 
+  # The class name of the controller you wish the sessions controller to inherit from.
+  config.inherited_controller = ApplicationController
+
   # The user lookup based on uid. Provide a block that will return the user that's been resolved.
   config.define_user_finder do |uid|
     User.find_by(uid: uid)
