@@ -8,8 +8,8 @@ AuthApi.configure do |config|
   config.client_secret = ''
   config.webhook_token = ''
 
-  # The name of the auth strategy the app will hit upon returning from Gauth. Defaulted to 'galvanize_auth' below.
-  config.strategy_name = 'galvanize_auth'
+  # The name of the auth strategy the app will hit upon returning from Gauth. Defaulted to 'galvanize' below.
+  config.strategy_name = 'galvanize'
 
   # The class name of the controller you wish the sessions controller to inherit from.
   config.inherited_controller = ApplicationController
