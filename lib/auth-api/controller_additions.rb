@@ -7,7 +7,7 @@ module AuthApi
     end
 
     def current_user
-      @current_user ||= AuthApi.configuration.user_finder.call(session[:user_uid])
+      @current_user ||= AuthApi.configuration.user_finder.call(session[:user_uid]) unless session[:user_uid].nil?
     end
   end
 end

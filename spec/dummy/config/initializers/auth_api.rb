@@ -12,7 +12,7 @@ AuthApi.configure do |config|
   config.strategy_name = 'galvanize'
 
   # The class name of the controller you wish the sessions controller to inherit from.
-  config.inherited_controller = 'ApplicationController'
+  config.inherited_controller = ActionController::Base
 
   # The user lookup based on uid. Provide a block that will return the user that's been resolved.
   config.define_user_finder do |uid|

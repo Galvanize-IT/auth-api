@@ -9,7 +9,10 @@ describe AuthApi::Engine do
   end
 
   it "adds AuthApi::ControllerAdditions into ActionController::Base" do
-    expect(ActionController::Base.new).to respond_to(:current_user)
+    AuthApi.configuration.inherited_controller = ActionController::Base
+    expect(AuthApi::SessionsController.new).to respond_to(:current_user)
   end
+
+
 
 end

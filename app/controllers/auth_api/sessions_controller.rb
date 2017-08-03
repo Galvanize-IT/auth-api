@@ -1,8 +1,8 @@
 module AuthApi
-  class SessionsController < AuthApi.configuration.inherited_controller.constantize
+  class SessionsController < AuthApi.configuration.inherited_controller
     def new
       # Redirect back to root if signed in, otherwise kick off the defined omniauth strategy.
-      redirect_to current_user ? main_app.root_path : "/auth/#{AuthApi.configuration.strategy_name}"
+      redirect_to current_user ? main_app.root_path : "#{AuthApi::Engine.mounted_path}/auth/#{AuthApi.configuration.strategy_name}"
     end
 
     def setup
@@ -14,6 +14,8 @@ module AuthApi
     def create
       # Find and/or optionally create your user.
       auth = request.env['omniauth.auth']
+      raise AuthApi::UserResolutionError, 'There was an error processing your request type' unless auth
+
       resource = Resource::Base.resolve_resources(auth.info) if auth.info.data
       user = AuthApi.configuration.user_resolver.call(resource) unless resource.nil?
       raise AuthApi::UserResolutionError, 'We were unable to find or create a user based on your credentials' unless user&.persisted?
