@@ -14,6 +14,10 @@ AuthApi.configure do |config|
   # The class name of the controller you wish the sessions controller to inherit from.
   config.inherited_controller = ActionController::Base
 
+  # The mount point that the engine is to be placed. Allows namespacing of omniauth callback methods. Set to
+  #  nil or remove the line to prevent the gem from mounting the engine, this allows you to mount it manually.
+  config.define_mount_point('/')
+
   # The user lookup based on uid. Provide a block that will return the user that's been resolved.
   config.define_user_finder do |uid|
     User.find_by(uid: uid)

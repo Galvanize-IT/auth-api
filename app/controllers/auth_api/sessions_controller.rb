@@ -2,7 +2,7 @@ module AuthApi
   class SessionsController < AuthApi.configuration.inherited_controller
     def new
       # Redirect back to root if signed in, otherwise kick off the defined omniauth strategy.
-      redirect_to current_user ? main_app.root_path : "#{AuthApi::Engine.mounted_path}/auth/#{AuthApi.configuration.strategy_name}"
+      redirect_to current_user ? main_app.root_path : "#{AuthApi.configuration.mounted_at}/auth/#{AuthApi.configuration.strategy_name}"
     end
 
     def setup

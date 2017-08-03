@@ -8,10 +8,6 @@ module AuthApi
       def copy_initializer
         template 'auth_api.rb.tt', 'config/initializers/auth_api.rb'
       end
-
-      def mount_engine_routes
-        route 'mount AuthApi::Engine, at: \'/\''
-      end
     end
   end
 end
