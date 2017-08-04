@@ -8,8 +8,8 @@ module AuthApi
     @@client_id            = ''
     @@client_secret        = ''
     @@webhook_token        = ''
-    @@url                  = 'https://auth-staging.galvanize.com'
-    @@strategy_name        = 'galvanize_auth'
+    @@url                  = ''
+    @@strategy_name        = 'galvanize'
     @@inherited_controller = ''
     @@mounted_at           = nil
 
