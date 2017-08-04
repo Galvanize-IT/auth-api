@@ -60,3 +60,7 @@ users.count # => 1
 users.first.first_name # => Jeremy
 users.first.products # => [AuthApi::Product]
 ```
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
