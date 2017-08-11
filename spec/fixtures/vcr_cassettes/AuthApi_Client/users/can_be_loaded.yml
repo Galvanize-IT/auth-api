@@ -27,9 +27,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 07 Jul 2017 04:20:14 GMT
+      - Thu, 10 Aug 2017 16:49:39 GMT
       Etag:
-      - W/"3ec0af8cdc79764f5256c2f4db341ca0"
+      - W/"0c301ba0f02f453bb7fe2ede176c48ca"
       Pragma:
       - no-cache
       Server:
@@ -39,21 +39,21 @@ http_interactions:
       X-Powered-By:
       - Phusion Passenger 4.0.60
       X-Request-Id:
-      - 6aacca8a-cbdb-4019-a794-7c5d58853122
+      - 0c50af7e-f43a-4a27-a9c3-baeb3c1013d5
       X-Runtime:
-      - '0.013841'
+      - '0.030943'
       Content-Length:
-      - '317'
+      - '319'
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
-      string: '{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJHYWx2YW5pemUiLCJpYXQiOjE0OTk0MDEyMTQsImp0aSI6ImE5MjBjZmY1ZmM3YjIyNjNmYmQ2OWRhOTcwZDkxNTY1IiwiZXhwIjoxNDk5NDA4NDE0fQ.ppNq2tFkbTjh0F_X4WTSh2yfR2d1Dq1_Udov5aub2hn5R7JR5Yb09N-2wJEGMTo_g9qaNdAndjYaa6LFBlZqfA","token_type":"bearer","expires_in":7200,"scope":"user.read","created_at":1499401214}'
+      string: '{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJHYWx2YW5pemUiLCJpYXQiOjE1MDIzODM3NzksImp0aSI6IjdhNDYyMzMzNmU4ZWRlOWUyMjRkOTIxY2JlZTAzYzhlIiwiZXhwIjoxNTAyMzkwOTc5fQ.FWHcR57-Yn32_RtfdxMKzh1WK-HFn2vx7VaQmbiIjBTO0lqKZUHK3nNEX_2W1aD4Z0akLCjcCLbV7bAC0DjejA","token_type":"bearer","expires_in":7200,"scope":"user.read","created_at":1502383779}'
     http_version: 
-  recorded_at: Fri, 07 Jul 2017 04:20:14 GMT
+  recorded_at: Thu, 10 Aug 2017 16:49:39 GMT
 - request:
     method: get
-    uri: https://auth-staging.galvanize.com/api/v1/users/U00123ABC
+    uri: https://auth-staging.galvanize.com/api/v1/users/003V000000VLPZCIA5
     body:
       encoding: US-ASCII
       string: ''
@@ -61,7 +61,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJHYWx2YW5pemUiLCJpYXQiOjE0OTk0MDEyMTQsImp0aSI6ImE5MjBjZmY1ZmM3YjIyNjNmYmQ2OWRhOTcwZDkxNTY1IiwiZXhwIjoxNDk5NDA4NDE0fQ.ppNq2tFkbTjh0F_X4WTSh2yfR2d1Dq1_Udov5aub2hn5R7JR5Yb09N-2wJEGMTo_g9qaNdAndjYaa6LFBlZqfA
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJHYWx2YW5pemUiLCJpYXQiOjE1MDIzODM3NzksImp0aSI6IjdhNDYyMzMzNmU4ZWRlOWUyMjRkOTIxY2JlZTAzYzhlIiwiZXhwIjoxNTAyMzkwOTc5fQ.FWHcR57-Yn32_RtfdxMKzh1WK-HFn2vx7VaQmbiIjBTO0lqKZUHK3nNEX_2W1aD4Z0akLCjcCLbV7bAC0DjejA
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -78,9 +78,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 07 Jul 2017 04:20:15 GMT
+      - Thu, 10 Aug 2017 16:49:39 GMT
       Etag:
-      - W/"2807f0de4e740da3e1f1978b4d6de8ea"
+      - W/"ac514b23465487727614e7d3b1e10e57"
       Server:
       - nginx/1.8.1 + Phusion Passenger 4.0.60
       Status:
@@ -92,20 +92,21 @@ http_interactions:
       X-Powered-By:
       - Phusion Passenger 4.0.60
       X-Request-Id:
-      - 27defabf-1da0-4c5b-9f96-02ba92c890fc
+      - f0a55417-ebb5-4368-be3d-dae1ddc5c378
       X-Runtime:
-      - '0.017460'
+      - '0.031886'
       X-Xss-Protection:
       - 1; mode=block
-      Content-Length:
-      - '447'
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
-      string: '{"data":{"id":"1","type":"users","attributes":{"uid":"U00123ABC","first_name":"Dev","last_name":"Auth","email":"dev+auth@galvanize.com","created_at":"2017-05-05T15:27:40.383Z","updated_at":"2017-07-07T04:19:03.788Z","sign_in_count":42,"roles":["app_admin","product_admin","admin"],"data":{}},"relationships":{"products":{"data":[{"id":"9","type":"products"}]}}},"included":[{"id":"9","type":"products","attributes":{"uid":"01tV0000003WPpFIAW","name":"Data
-        Science","slug":"data-science","title":"Galvanize Statistics Short-Course
-        for Data Science May 30 and June 1","product_type":"Workshop","label":"17-01-WS-DP-ST","gcode":null,"campus_name":"Denver-Platte","slack_channel":null,"starts_on":"2017-05-31T00:00:00.000Z","ends_on":"2017-06-01T00:00:00.000Z"}}]}'
+      string: '{"data":{"id":"1","type":"users","attributes":{"uid":"003V000000VLPZCIA5","first_name":"Dev","last_name":"Auth","profile_image":"//profile-images-staging.galvanize.com/attachments/2c1f18c6929165fc24d6a6d4b6a7f3c9bce90d80/store/profile_crop/200/eyJwb2ludHMiOlsiMzYiLCIzNiIsIjMyNCIsIjMyNCJdLCJ6b29tIjowLjY5NDR9/ede5dcaf3b34a27e6a99c03b7a484b96109ecaa722c0f6459bfef30887dc/0_360.png","email":"dev+auth@galvanize.com","created_at":"2017-05-05T15:27:40.383Z","updated_at":"2017-08-08T21:29:07.939Z","sign_in_count":91,"roles":["auth.app_admin","auth.admin","auth.product_admin"],"product_roles":["01tj0000003h8iLAAQ.instructor"],"data":{"talent":{"key2":"_value2_","key":"blah"},"learn":{"key2":"_value1_"}}},"relationships":{"registrations":{"data":[{"id":"130","type":"registrations"},{"id":"131","type":"registrations"}]},"products":{"data":[{"id":"3","type":"products"},{"id":"3","type":"products"}]}}},"included":[{"id":"130","type":"registrations","attributes":{"role":"instructor","created_at":"2017-08-10T16:28:17.873Z"},"relationships":{"product":{"data":{"id":"3","type":"products"}}}},{"id":"131","type":"registrations","attributes":{"role":"","created_at":"2017-08-10T16:47:38.472Z"},"relationships":{"product":{"data":{"id":"3","type":"products"}}}},{"id":"3","type":"products","attributes":{"uid":"01tj0000003h8iLAAQ","name":"Web
+        Development","slug":null,"title":"WEB DEVELOPMENT PHOENIX WAREHOUSE DISTRICT
+        - AUGUST 2017","product_type":"24 Week Full-Time Immersive","label":"17-04-WD-PHX","gcode":null,"campus_name":"Phoenix-Warehouse
+        District","slack_channel":null,"starts_on":"2017-08-21T06:00:00.000Z","ends_on":"2018-02-09T07:00:00.000Z","created_at":"2017-05-15T20:53:53.259Z"}}]}'
     http_version: 
-  recorded_at: Fri, 07 Jul 2017 04:20:15 GMT
+  recorded_at: Thu, 10 Aug 2017 16:49:39 GMT
 recorded_with: VCR 3.0.3

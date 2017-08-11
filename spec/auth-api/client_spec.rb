@@ -92,14 +92,18 @@ describe AuthApi::Client do
     let(:scope) { 'user.read' }
 
     it "can be loaded", :vcr do
-      user = subject.user_details(uid: 'U00123ABC')
+      user = subject.user_details(uid: '003V000000VLPZCIA5')
       expect(user).to be_an_instance_of AuthApi::User
       expect(user.first_name).to eq 'Dev'
       expect(user.attributes[:first_name]).to eq 'Dev'
 
-      expect(user.products.length).to eq 1
+      expect(user.products.length).to eq 2
+      expect(user.registrations.length).to eq 2
+
       expect(user.products[0]).to be_an_instance_of AuthApi::Product
-      expect(user.products[0].name).to eq 'Data Science'
+      expect(user.products[0].name).to eq 'Web Development'
+      expect(user.products[0].label).to eq '17-04-WD-PHX'
+      expect{ user.products[0].foo }.to raise_error NoMethodError
     end
 
   end
