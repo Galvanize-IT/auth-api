@@ -103,7 +103,10 @@ describe AuthApi::Client do
       expect(user.products[0]).to be_an_instance_of AuthApi::Product
       expect(user.products[0].name).to eq 'Web Development'
       expect(user.products[0].label).to eq '17-04-WD-PHX'
+
       expect{ user.products[0].foo }.to raise_error NoMethodError
+      expect(user.products[0].foo?).to be_falsey
+      expect(user.products[0].label?).to be_truthy
     end
 
   end

@@ -50,7 +50,11 @@ module AuthApi
 
       def method_missing(key, *args)
         if key =~ /=$/
+          key = key.to_s.gsub(/=$/, '').to_sym
           @attributes[key.to_s.gsub(/=$/, '').to_sym] = args[0]
+        elsif key =~ /\?$/
+          key = key.to_s.gsub(/\?$/, '').to_sym
+          !(@attributes[key] == nil || @attributes[key] == false)
         elsif @attributes.key?(key.to_sym)
           @attributes[key.to_sym]
         else
