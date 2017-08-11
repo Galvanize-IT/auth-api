@@ -28,9 +28,17 @@ module AuthApi
 
       def self.resolve_resource_and_relationships(data, included)
         (data[:relationships] || {}).each do |k, v|
-          data[:attributes][k.to_sym] = v[:data].map { |r| included[r[:type]][r[:id]] }
+          data[:attributes][k.to_sym] = resolve_relationships(v[:data], included)
         end
         resolve_resource_type(data)
+      end
+
+      def self.resolve_relationships(rels, included)
+        if rels.is_a?(Array)
+          rels.map { |r| resolve_resource_and_relationships(included[r[:type]][r[:id]], included) }
+        else
+          resolve_resource_and_relationships(included[rels[:type]][rels[:id]], included)
+        end
       end
 
       def self.resolve_included_resources(included)
@@ -38,7 +46,7 @@ module AuthApi
         resolved = {}
         included.each do |record|
           resolved[record[:type]] ||= {}
-          resolved[record[:type]][record[:id]] = resolve_resource_type(record)
+          resolved[record[:type]][record[:id]] = record
         end
         resolved
       end

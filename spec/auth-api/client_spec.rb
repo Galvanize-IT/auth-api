@@ -91,6 +91,13 @@ describe AuthApi::Client do
   describe "users" do
     let(:scope) { 'user.read' }
 
+    before do
+      # set your client_id and client_secret here
+      # allow(AuthApi.configuration).to receive(:client_id).and_return ''
+      # allow(AuthApi.configuration).to receive(:client_secret).and_return ''
+      # allow(AuthApi.configuration).to receive(:url).and_return 'https://auth-staging.galvanize.com'
+    end
+
     it "can be loaded", :vcr do
       user = subject.user_details(uid: '003V000000VLPZCIA5')
       expect(user).to be_an_instance_of AuthApi::User
@@ -107,6 +114,16 @@ describe AuthApi::Client do
       expect{ user.products[0].foo }.to raise_error NoMethodError
       expect(user.products[0].foo?).to be_falsey
       expect(user.products[0].label?).to be_truthy
+
+      expect(user.registrations[0]).to be_an_instance_of AuthApi::Registration
+      expect(user.registrations[0].role).to eq 'instructor'
+      expect(user.registrations[0].product?).to be_truthy
+      expect(user.registrations[0].product).to be_an_instance_of AuthApi::Product
+      expect(user.registrations[0].product.label).to eq '17-04-WD-PHX'
+
+      expect(user.registrations[1]).to be_an_instance_of AuthApi::Registration
+      expect(user.registrations[1].role).to eq ''
+      expect(user.registrations[1].product.label).to eq '17-04-WD-PHX'
     end
 
   end
