@@ -4,7 +4,7 @@ module OmniAuth
       option :name, :galvanize
 
       uid do
-        raw_info['data']['attributes']['uid']
+        raw_info["data"]["attributes"]["uid"]
       end
 
       info do
@@ -12,7 +12,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get('/api/v1/me').parsed
+        @raw_info ||= access_token.get("/api/v1/me").parsed
       end
     end
   end

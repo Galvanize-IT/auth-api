@@ -1,7 +1,7 @@
 module AuthApi
-  autoload :User, 'auth-api/resources/user'
-  autoload :Product, 'auth-api/resources/product'
-  autoload :Registration, 'auth-api/resources/registration'
+  autoload :User, "auth-api/resources/user"
+  autoload :Product, "auth-api/resources/product"
+  autoload :Registration, "auth-api/resources/registration"
 
   module Resource
     class Base
@@ -20,9 +20,9 @@ module AuthApi
 
       def self.resolve_resource_type(data)
         case data[:type]
-        when 'products' then Product.new(data)
-        when 'registrations' then Registration.new(data)
-        when 'users' then User.new(data)
+        when "products" then Product.new(data)
+        when "registrations" then Registration.new(data)
+        when "users" then User.new(data)
         end
       end
 
@@ -59,11 +59,11 @@ module AuthApi
 
       def method_missing(key, *args)
         if key =~ /=$/
-          key = key.to_s.gsub(/=$/, '').to_sym
-          @attributes[key.to_s.gsub(/=$/, '').to_sym] = args[0]
+          key = key.to_s.gsub(/=$/, "").to_sym
+          @attributes[key.to_s.gsub(/=$/, "").to_sym] = args[0]
         elsif key =~ /\?$/
-          key = key.to_s.gsub(/\?$/, '').to_sym
-          !(@attributes[key] == nil || @attributes[key] == false)
+          key = key.to_s.gsub(/\?$/, "").to_sym
+          !(@attributes[key].nil? || @attributes[key] == false)
         elsif @attributes.key?(key.to_sym)
           @attributes[key.to_sym]
         else

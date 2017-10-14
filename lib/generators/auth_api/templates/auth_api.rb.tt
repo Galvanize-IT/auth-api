@@ -1,7 +1,7 @@
 AuthApi.configure do |config|
 
   # Different environments can use different Auth urls.
-  config.url = 'https://auth-staging.galvanize.com'
+  config.url = 'https://localhost:5000'
 
   # Provide the Client ID, Secret, and Webhook Token as provided through the Auth application interface.
   config.client_id = ''
@@ -14,23 +14,24 @@ AuthApi.configure do |config|
   # The class name of the controller you wish the sessions controller to inherit from.
   config.inherited_controller = ApplicationController
 
-  # The mount point that the engine is to be placed. Allows namespacing of omniauth callback methods. Set to
-  #  nil or remove the line to prevent the gem from mounting the engine, this allows you to mount it manually.
-  config.define_mount_point('/')
+  # The mount point that the engine is to be placed. Allows namespacing of omniauth callback methods.
+  # Set to nil to prevent mounting the engine, this allows you to mount it manually.
+  config.define_mount_point '/'
 
-  # The user lookup based on uid. Provide a block that will return the user that's been resolved.
-  config.define_user_finder do |uid|
-    User.find_by(uid: uid)
-  end
+  # The user lookup based on uid -- primarily for looking a user up using their session, e.g. current_user.
+  # Provide a block that will return the user that's been resolved.
+  config.define_user_finder { |uid| User.find_by(uid: uid) }
 
+  # The user resolver based on what Auth provided.
   # When a session is being created, we can find or create a user. This doesn't need to create a user however,
   # so implement what makes sense -- if no user is returned, an AuthApi::UserResolutionError is raised which
   # can be handled in your application controller.
   config.define_user_resolver do |auth_user|
-    # Pull only the attributes we want.
+    # Pull only the attributes we want, which will generally get us somewhere useful.
     attrs = auth_user.attribute_intersection(User.new.attributes.keys)
 
-    # Find the user or create a new one (the creating of one is totally optional).
+    # Find the user or create a new one, but...
+    # 1. Creating one is totally optional and probably depends on the products they're registered for.
     user = User.find_by(uid: auth_user.uid) || User.new(attrs)
 
     # We update the last time we saw them, but...

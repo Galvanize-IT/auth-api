@@ -1,27 +1,19 @@
 AuthApi.configure do |config|
 
   # Different environments can use different Auth urls.
-  config.url = 'https://auth-staging.galvanize.com'
+  config.url = "https://auth-staging.galvanize.com"
 
   # Provide the Client ID, Secret, and Webhook Token as provided through the Auth application interface.
-  config.client_id = ''
-  config.client_secret = ''
-  config.webhook_token = ''
-
-  # The name of the auth strategy the app will hit upon returning from Gauth. Defaulted to 'galvanize_auth' below.
-  config.strategy_name = 'galvanize'
-
-  # The class name of the controller you wish the sessions controller to inherit from.
-  config.inherited_controller = ActionController::Base
+  config.client_id = ""
+  config.client_secret = ""
+  config.webhook_token = ""
 
   # The mount point that the engine is to be placed. Allows namespacing of omniauth callback methods. Set to
   #  nil or remove the line to prevent the gem from mounting the engine, this allows you to mount it manually.
-  config.define_mount_point('/')
+  config.define_mount_point "/"
 
   # The user lookup based on uid. Provide a block that will return the user that's been resolved.
-  config.define_user_finder do |uid|
-    User.find_by(uid: uid)
-  end
+  config.define_user_finder { |uid| User.find_by(uid: uid) }
 
   # When a session is being created, we can find or create a user. This doesn't need to create a user however,
   # so implement what makes sense -- if no user is returned, an AuthApi::UserResolutionError is raised which

@@ -4,23 +4,24 @@ module AuthApi
   class Configuration
     include Singleton
 
-    cattr_accessor :client_id, :client_secret, :webhook_token, :url, :strategy_name, :inherited_controller, :mounted_at
-    @@client_id            = ''
-    @@client_secret        = ''
-    @@webhook_token        = ''
-    @@url                  = ''
-    @@strategy_name        = 'galvanize'
-    @@inherited_controller = ''
-    @@mounted_at           = nil
+    cattr_accessor :url, :client_id, :client_secret, :webhook_token, :strategy_name, :inherited_controller, :mounted_at
+    @@url = ""
+    @@client_id = ""
+    @@client_secret = ""
+    @@webhook_token = ""
+    @@strategy_name = "galvanize"
+    @@inherited_controller = ActionController::Base
+    @@mounted_at = nil
 
     cattr_reader :user_finder, :user_resolver
+
     def self.define_user_finder(&block)
       raise AuthApi::NoBlockGiven unless block_given?
       @@user_finder = block
     end
 
     def self.define_mount_point(mount)
-      @@mounted_at = mount.match(/^\/$/) ? '' : mount
+      @@mounted_at = mount == "/" ? "" : mount
     end
 
     def self.define_user_resolver(&block)

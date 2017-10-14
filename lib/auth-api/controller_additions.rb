@@ -3,9 +3,7 @@ module AuthApi
     extend ActiveSupport::Concern
 
     included do
-      if respond_to?(:helper_method)
-        helper_method :current_user
-      end
+      helper_method(:current_user) if respond_to?(:helper_method)
     end
 
     def current_user
@@ -13,4 +11,3 @@ module AuthApi
     end
   end
 end
-

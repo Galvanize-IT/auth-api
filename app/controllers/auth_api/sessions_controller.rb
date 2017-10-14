@@ -2,7 +2,7 @@ module AuthApi
   class SessionsController < AuthApi.configuration.inherited_controller
     def new
       # Redirect back to root if signed in, otherwise kick off the defined omniauth strategy.
-      redirect_to current_user ? main_app.root_path : "#{AuthApi.configuration.mounted_at}/auth/#{AuthApi.configuration.strategy_name}"
+      redirect_to current_user ? main_app.root_path : auth_sign_in_path
     end
 
     def setup
@@ -13,12 +13,16 @@ module AuthApi
 
     def create
       # Find and/or optionally create your user.
-      auth = request.env['omniauth.auth']
-      raise AuthApi::UserResolutionError, 'There was an error processing your request type' unless auth
+      auth = request.env["omniauth.auth"]
+      unless auth
+        raise AuthApi::UserResolutionError, "There was an error processing your request type"
+      end
 
       resource = Resource::Base.resolve_resources(auth.info) if auth.info.data
       user = AuthApi.configuration.user_resolver.call(resource) unless resource.nil?
-      raise AuthApi::UserResolutionError, 'We were unable to find or create a user based on your credentials' unless user&.persisted?
+      unless user&.persisted?
+        raise AuthApi::UserResolutionError, "We were unable to find or create a user based on your credentials"
+      end
 
       # Reset the session and assign the users uid to the clean session.
       reset_session
@@ -45,7 +49,17 @@ module AuthApi
       session[:user_uid] = nil
 
       # Sign out from everywhere.
-      redirect_to [AuthApi.configuration.url, '/sign_out?redirect=', main_app.root_url].join('')
+      redirect_to auth_sign_out_path
+    end
+
+    private
+
+    def auth_sign_in_path
+      [AuthApi.configuration.mounted_at, "auth", AuthApi.configuration.strategy_name].join("/")
+    end
+
+    def auth_sign_out_path
+      [AuthApi.configuration.url, "/sign_out?redirect=", main_app.root_url].join("")
     end
   end
 end

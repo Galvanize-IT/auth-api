@@ -1,21 +1,21 @@
-$:.push File.expand_path('../lib', __FILE__)
+$:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require 'auth-api/version'
+require "auth-api/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = 'auth-api'
+  s.name        = "auth-api"
   s.version     = AuthApi::VERSION
-  s.authors     = ['jejacks0n', 'dlinch']
-  s.email       = ['software@galvanize.com']
-  s.homepage    = 'https://github.com/Galvanize-IT/auth-api'
-  s.summary     = 'Auth-API: Auth interface'
-  s.description = 'Interface with Auth including webhooks, api and authentication.'
-  s.license     = 'MIT'
+  s.authors     = ["jejacks0n", "dlinch"]
+  s.email       = ["software@galvanize.com"]
+  s.homepage    = "https://github.com/Galvanize-IT/auth-api"
+  s.summary     = "Auth-API: Auth interface"
+  s.description = "Interface with Auth including webhooks, API and authentication."
+  s.license     = "MIT"
 
-  s.files       = Dir['{app,lib}/**/*'] + ['MIT.LICENSE', 'README.md']
+  s.files       = Dir["{app,lib}/**/*"] + ["MIT.LICENSE", "README.md"]
 
-  s.add_dependency 'railties', ['< 6']
-  s.add_dependency 'omniauth-oauth2', ['< 1.4.0']
+  s.add_dependency "railties", ["< 6"]
+  s.add_dependency "omniauth-oauth2", ["< 1.4.0"]
 end

@@ -1,0 +1,203 @@
+AllCops:
+  Exclude:
+    - Rakefile
+    - spec/dummy/bin/**/*
+    - spec/dummy/vendor/**/*
+    - spec/dummy/db/schema.rb
+    - spec/dummy/Rakefile
+
+Rails:
+  Enabled: true
+
+Bundler/OrderedGems:
+  Enabled: false
+
+# Cop supports --auto-correct.
+Style/Semicolon:
+  Enabled: true
+
+# Offense count: 3
+# Configuration parameters: AllowSafeAssignment.
+Lint/AssignmentInCondition:
+  Enabled: true
+
+# Offense count: 2
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyleAlignWith, SupportedStylesAlignWith, AutoCorrect.
+# SupportedStylesAlignWith: keyword, variable, start_of_line
+Lint/EndAlignment:
+  Enabled: true
+
+# Offense count: 4
+Lint/HandleExceptions:
+  Enabled: true
+
+Lint/IneffectiveAccessModifier:
+  Enabled: true
+
+Lint/UselessAccessModifier:
+  Enabled: true
+
+Lint/RescueException:
+  Enabled: true
+
+Style/DoubleNegation:
+  Enabled: true
+
+Style/MultilineBlockChain:
+  Enabled: true
+
+Style/VariableNumber:
+  Enabled: true
+#  Exclude:
+#    - 'spec/**/*'
+
+Metrics/AbcSize:
+  Enabled: true
+  Max: 120
+
+Metrics/BlockLength:
+  Enabled: true
+  Max: 1200
+
+Metrics/BlockNesting:
+  Enabled: true
+  Max: 6
+
+Metrics/ClassLength:
+  Enabled: true
+  Max: 500
+
+Metrics/CyclomaticComplexity:
+  Enabled: true
+  Max: 25
+
+Metrics/LineLength:
+  Enabled: true
+  Max: 120
+
+Metrics/MethodLength:
+  Enabled: true
+  Max: 100
+
+Metrics/ModuleLength:
+  Enabled: true
+  Max: 500
+
+Metrics/ParameterLists:
+  Enabled: true
+  Max: 8
+
+# Offense count: 34
+Metrics/PerceivedComplexity:
+  Enabled: true
+  Max: 26
+
+Rails/OutputSafety:
+  Enabled: true
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+Style/SpecialGlobalVars:
+  EnforcedStyle: use_perl_names
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Rails/TimeZone:
+  Enabled: true
+#  Exclude:
+#    - 'spec/**/*'
+
+Style/TrivialAccessors:
+  Enabled: true
+
+# Intentionally disabled rules
+Performance/StartWith:
+  Enabled: false
+
+Performance/TimesMap:
+  Enabled: false
+
+Rails/DynamicFindBy:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/FindBy:
+  Enabled: false
+
+Rails/HttpPositionalArguments:
+  Enabled: false
+
+Security/YAMLLoad:
+  Enabled: false
+
+Style/AndOr:
+  Enabled: false
+
+Layout/CaseIndentation:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/NumericLiteralPrefix:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/RedundantParentheses:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/UnneededPercentQ:
+  Enabled: false
+
+Style/VariableName:
+  Enabled: true
+
+Style/WordArray:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Layout/AlignHash:
+  Enabled: false
+
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+  Exclude:
+    - app/models/**/*
+    - app/serializers/**/*
+
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+
+Style/ClassVars:
+  Enabled: true
+  Exclude:
+    - lib/auth-api/configuration.rb
