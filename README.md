@@ -67,7 +67,7 @@ This constraint provides a simple and handy way to require a user to be signed i
 will just return a 404, like the nested routes don't exist.
 
 ```ruby
-constraints AuthApi::UserConstraint do
+constraints AuthApi::AuthenticatedConstraint do
   match "/restricted_path", via: :get
 end
 ```
