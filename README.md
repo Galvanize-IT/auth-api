@@ -1,10 +1,11 @@
-Auth API [![CircleCI](https://circleci.com/gh/Galvanize-IT/auth-api.svg?style=svg&circle-token=738d6f5d830c1949e753c7243f86fb18f180d6d7)](https://circleci.com/gh/Galvanize-IT/auth-api)
-========
+Auth API [![Build](http://circleci-badges-max.herokuapp.com/img/Galvanize-IT/auth-api/master?token=738d6f5d830c1949e753c7243f86fb18f180d6d7)](https://circleci.com/gh/Galvanize-IT/auth-api)
+======== 
 
 This gem has the basics required to get started using Auth. 
 
 You can build all of the things you may need manually, but this gem includes several aspects that you would otherwise
 need to build. You can feel free to use the gem or use it as an example.
+
 
 ## Installation
 
@@ -17,6 +18,7 @@ To get the basic configuration initializer and routes, run the install generator
 ```shell
 rails generate auth_api:install
 ```
+
 
 ## Usage
 
@@ -83,6 +85,7 @@ users.count # => 1
 users.first.first_name # => Jeremy
 users.first.products # => [AuthApi::Product]
 ```
+
 
 ## License
 
