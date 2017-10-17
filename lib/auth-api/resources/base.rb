@@ -8,6 +8,7 @@ module AuthApi
       attr_reader :attributes
 
       def self.resolve_resources(json)
+        json = json.deep_symbolize_keys
         data = json[:data]
         included = resolve_included_resources(json[:included])
 
@@ -54,13 +55,13 @@ module AuthApi
 
       def initialize(data = {})
         @id = data[:id]
-        @attributes = data[:attributes] || {}
+        @attributes = (data[:attributes] || {}).deep_symbolize_keys
       end
 
       def method_missing(key, *args)
         if key =~ /=$/
           key = key.to_s.gsub(/=$/, "").to_sym
-          @attributes[key.to_s.gsub(/=$/, "").to_sym] = args[0]
+          @attributes[key] = args[0]
         elsif key =~ /\?$/
           key = key.to_s.gsub(/\?$/, "").to_sym
           !(@attributes[key].nil? || @attributes[key] == false)
