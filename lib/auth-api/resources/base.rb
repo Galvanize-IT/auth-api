@@ -53,6 +53,10 @@ module AuthApi
         resolved
       end
 
+      def self.define_array_attributes(*attrs)
+        attrs.each { |attr| define_method(attr) { @attributes[attr] || [] } }
+      end
+
       def initialize(data = {})
         @id = data[:id]
         @attributes = (data[:attributes] || {}).deep_symbolize_keys
