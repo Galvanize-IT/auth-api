@@ -53,10 +53,15 @@ describe AuthApi::Resource::Base do
 
   it "can resolve resources with relationships" do
     resource = described_class.resolve_resources(json)
+    resource.last_name = "SecretAgentMan"
     expect(resource).to be_an_instance_of AuthApi::User
     expect(resource.products[0]).to be_an_instance_of AuthApi::Product
     expect(resource.first_name).to eq "Sterling"
+    expect(resource.last_name).to eq "SecretAgentMan"
+    expect(resource.email?).to be_truthy
     expect(resource.products[0].name).to eq "Web Development"
+    expect { resource.unknown_prop }.to raise_error(NoMethodError)
+  end
 
   it "defines empty relationships when they're empty" do
     resource_json = json
