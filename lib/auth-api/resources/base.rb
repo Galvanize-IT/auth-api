@@ -36,6 +36,7 @@ module AuthApi
       end
 
       def self.resolve_relationships(rels, included)
+        return [] if rels.blank?
         if rels.is_a?(Array)
           rels.map { |r| resolve_resource_and_relationships(included[r[:type]][r[:id]], included) }
         else
@@ -54,7 +55,7 @@ module AuthApi
       end
 
       def self.define_array_attributes(*attrs)
-        attrs.each { |attr| define_method(attr) { @attributes[attr] || [] } }
+        attrs.each { |attr| define_method(attr) { @attributes[attr] ||= [] } }
       end
 
       def initialize(data = {})

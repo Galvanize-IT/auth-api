@@ -65,7 +65,7 @@ describe AuthApi::Resource::Base do
 
   it "defines empty relationships when they're empty" do
     resource_json = json
-    resource_json[:data].delete(:relationships)
+    resource_json[:data][:relationships][:products][:data] = nil
     resource = described_class.resolve_resources(json)
     expect(resource).to be_an_instance_of AuthApi::User
     expect(resource.products).to eq []
