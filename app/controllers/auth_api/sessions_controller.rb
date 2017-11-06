@@ -55,7 +55,7 @@ module AuthApi
     private
 
     def after_sign_in_path
-      instance_exec(&AuthApi.configuration.after_sign_in_path)
+      main_app.instance_exec(&AuthApi.configuration.after_sign_in_path)
     end
 
     def auth_sign_in_path
