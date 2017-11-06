@@ -2,7 +2,7 @@ module AuthApi
   class SessionsController < AuthApi.configuration.inherited_controller
     def new
       # Redirect back to root if signed in, otherwise kick off the defined omniauth strategy.
-      redirect_to current_user ? after_sign_in(&AuthApi.configuration.after_sign_in_path) : auth_sign_in_path
+      redirect_to current_user ? after_sign_in_path : auth_sign_in_path
     end
 
     def setup
@@ -25,14 +25,14 @@ module AuthApi
       end
 
       # Reset the session and assign the users uid to the clean session.
-      reset_session
+      # reset_session
       session[:user_uid] = user.uid
     rescue AuthApi::UserResolutionError => e
       # Set the flash message.
       flash[:alert] = e.message
     ensure
       # Redirect to where you think they should go.
-      redirect_to after_sign_in(&AuthApi.configuration.after_sign_in_path)
+      redirect_to after_sign_in_path
     end
 
     def failure
@@ -54,8 +54,8 @@ module AuthApi
 
     private
 
-    def after_sign_in(&block)
-      main_app.instance_exec(&block)
+    def after_sign_in_path
+      instance_exec(&AuthApi.configuration.after_sign_in_path)
     end
 
     def auth_sign_in_path

@@ -12,7 +12,7 @@ module AuthApi
     @@webhook_token = ""
     @@strategy_name = "galvanize"
     @@inherited_controller = ActionController::Base
-    @@after_sign_in_path = ->{ root_path }
+    @@after_sign_in_path = ->{ main_app.root_path }
     @@mounted_at = nil
 
     cattr_reader :user_finder, :user_resolver
