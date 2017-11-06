@@ -4,13 +4,15 @@ module AuthApi
   class Configuration
     include Singleton
 
-    cattr_accessor :url, :client_id, :client_secret, :webhook_token, :strategy_name, :inherited_controller, :mounted_at
+    cattr_accessor :url, :client_id, :client_secret, :webhook_token, :strategy_name, :inherited_controller, :mounted_at,
+                   :after_sign_in_path
     @@url = ""
     @@client_id = ""
     @@client_secret = ""
     @@webhook_token = ""
     @@strategy_name = "galvanize"
     @@inherited_controller = ActionController::Base
+    @@after_sign_in_path = ->{ root_path }
     @@mounted_at = nil
 
     cattr_reader :user_finder, :user_resolver

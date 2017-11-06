@@ -2,7 +2,7 @@ module AuthApi
   class SessionsController < AuthApi.configuration.inherited_controller
     def new
       # Redirect back to root if signed in, otherwise kick off the defined omniauth strategy.
-      redirect_to current_user ? main_app.root_path : auth_sign_in_path
+      redirect_to current_user ? after_sign_in(&AuthApi.configuration.after_sign_in_path) : auth_sign_in_path
     end
 
     def setup
@@ -32,7 +32,7 @@ module AuthApi
       flash[:alert] = e.message
     ensure
       # Redirect to where you think they should go.
-      redirect_to main_app.root_path
+      redirect_to after_sign_in(&AuthApi.configuration.after_sign_in_path)
     end
 
     def failure
@@ -53,6 +53,10 @@ module AuthApi
     end
 
     private
+
+    def after_sign_in(&block)
+      main_app.instance_exec(&block)
+    end
 
     def auth_sign_in_path
       [AuthApi.configuration.mounted_at, "auth", AuthApi.configuration.strategy_name].join("/")

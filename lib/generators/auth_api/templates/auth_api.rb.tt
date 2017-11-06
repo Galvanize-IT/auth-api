@@ -14,6 +14,9 @@ AuthApi.configure do |config|
   # The class name of the controller you wish the sessions controller to inherit from.
   config.inherited_controller = ApplicationController
 
+  # The path you would like users to be redirected to after successful sign in.
+  config.after_sign_in_path = ->{ root_path }
+
   # The mount point that the engine is to be placed. Allows namespacing of omniauth callback methods.
   # Set to nil to prevent mounting the engine, this allows you to mount it manually.
   config.define_mount_point '/'
