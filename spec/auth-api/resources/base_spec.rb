@@ -26,6 +26,11 @@ describe AuthApi::Resource::Base do
             data: [
               { id: "44", type: "products" }
             ]
+          },
+          identities: {
+            data: [
+              { id: "666", type: "identities" }
+            ]
           }
         }
       },
@@ -46,6 +51,16 @@ describe AuthApi::Resource::Base do
             starts_on: "2017-04-20T11:28:43.000Z",
             ends_on: "2017-04-20T11:28:43.000Z"
           }
+        },
+        {
+          id: "666",
+          type: "identities",
+          attributes: {
+            provider: "github",
+            uid: "abc123",
+            username: "kravmaga29",
+            created_at: "2017-04-20T11:28:43.000Z",
+          }
         }
       ]
     }
@@ -60,6 +75,7 @@ describe AuthApi::Resource::Base do
     expect(resource.last_name).to eq "SecretAgentMan"
     expect(resource.email?).to be_truthy
     expect(resource.products[0].name).to eq "Web Development"
+    expect(resource.identities[0].username).to eq "kravmaga29"
     expect { resource.unknown_prop }.to raise_error(NoMethodError)
   end
 

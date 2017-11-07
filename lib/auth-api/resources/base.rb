@@ -2,6 +2,7 @@ module AuthApi
   autoload :User, "auth-api/resources/user"
   autoload :Product, "auth-api/resources/product"
   autoload :Registration, "auth-api/resources/registration"
+  autoload :Identity, "auth-api/resources/identity"
 
   module Resource
     class Base
@@ -21,9 +22,10 @@ module AuthApi
 
       def self.resolve_resource_type(data)
         case data[:type]
+        when "users" then User.new(data)
         when "products" then Product.new(data)
         when "registrations" then Registration.new(data)
-        when "users" then User.new(data)
+        when "identities" then Identity.new(data)
         end
       end
 
