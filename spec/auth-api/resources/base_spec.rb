@@ -31,6 +31,11 @@ describe AuthApi::Resource::Base do
             data: [
               { id: "666", type: "identities" }
             ]
+          },
+          favorite_drinks: {
+            data: [
+              { id: "42", type: "drinks" }
+            ]
           }
         }
       },

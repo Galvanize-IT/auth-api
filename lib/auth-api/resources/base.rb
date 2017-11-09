@@ -40,7 +40,11 @@ module AuthApi
       def self.resolve_relationships(rels, included)
         return [] if rels.blank?
         if rels.is_a?(Array)
-          rels.map { |r| resolve_resource_and_relationships(included[r[:type]][r[:id]], included) }
+          rels.map do |r|
+            included_resources = included[r[:type]]
+            next unless included_resources
+            resolve_resource_and_relationships(included_resources[r[:id]], included)
+          end
         else
           resolve_resource_and_relationships(included[rels[:type]][rels[:id]], included)
         end
