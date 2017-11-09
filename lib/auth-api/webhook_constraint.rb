@@ -2,7 +2,7 @@ module AuthApi
   class WebhookConstraint
     def self.matches?(request)
       token_match = request.headers["X-Auth-Token"] == AuthApi.configuration.webhook_token
-      request.env[:resolved_resource] = Resource::Base.resolve_resources(request.params)
+      request.env[:resolved_resource] = Resource::Base.resolve_resources(request.params) rescue nil
       token_match
     end
   end

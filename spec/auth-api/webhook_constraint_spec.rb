@@ -16,4 +16,15 @@ describe AuthApi::WebhookConstraint do
     expect(described_class.matches?(request)).to be_falsey
   end
 
+  it "handles matching when the resource is failed to be parsed" do
+    allow(AuthApi::Resource::Base).to receive(:resolve_resources).and_raise(StandardError)
+    request = double(env: { resolved_resource: {} }, params: {}, headers: { "X-Auth-Token" => "_webhook_token_" })
+
+    expect(described_class.matches?(request)).to be_truthy
+    expect(request.env[:resolved_resource]).to be_nil
+
+    request = double(env: { resolved_resource: {} }, params: {}, headers: { "X-Auth-Token" => "_not_webhook_token_" })
+    expect(described_class.matches?(request)).to be_falsey
+  end
+
 end
