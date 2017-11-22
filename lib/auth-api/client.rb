@@ -8,19 +8,25 @@ module AuthApi
 
     include AuthApi::Endpoints::Products
 
+    def self.endpoint(path, params = {})
+      uri = URI.parse(AuthApi.configuration.url + API_ENDPOINT + path.gsub(/^\//, ""))
+      uri.query = URI.encode_www_form(params) unless params.empty?
+      uri
+    end
+
     def initialize(scope = "")
       @scope = scope
     end
 
     def post(path, params = {}, headers = {}, &block)
-      request(:post, endpoint(path), headers) do |request|
+      request(:post, self.class.endpoint(path), headers) do |request|
         request.body = params.to_json
         handle_response_for(request, &block)
       end
     end
 
     def put(path, params = {}, headers = {}, &block)
-      request(:put, endpoint(path), headers) do |request|
+      request(:put, self.class.endpoint(path), headers) do |request|
         request.body = params.to_json
         handle_response_for(request, &block)
       end
@@ -28,20 +34,20 @@ module AuthApi
     alias patch put
 
     def delete(path, params = {}, headers = {}, &block)
-      request(:delete, endpoint(path, params), headers) do |request|
+      request(:delete, self.class.endpoint(path, params), headers) do |request|
         handle_response_for(request, &block)
       end
     end
 
     def get(path, params = {}, headers = {}, &block)
-      request(:get, endpoint(path, params), headers) do |request|
+      request(:get, self.class.endpoint(path, params), headers) do |request|
         handle_response_for(request, &block)
       end
     end
 
     def request(method, uri, headers)
       @http = Net::HTTP.new(uri.host, uri.port)
-      @http.use_ssl = true
+      @http.use_ssl = uri.scheme == "https"
 
       yield net_class_for(method).new(uri.request_uri, default_headers(headers))
     end
@@ -86,12 +92,6 @@ module AuthApi
 
     def default_headers(headers)
       { "Content-Type" => "application/json", "Authorization" => "Bearer #{token_info[:access_token]}" }.merge(headers)
-    end
-
-    def endpoint(path, params = {})
-      uri = URI.parse(AuthApi.configuration.url + API_ENDPOINT + path.gsub(/^\//, ""))
-      uri.query = URI.encode_www_form(params) unless params.empty?
-      uri
     end
   end
 end
