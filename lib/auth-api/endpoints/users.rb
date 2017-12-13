@@ -9,6 +9,10 @@ module AuthApi
       def create_user(opts = {})
         post "users", user: opts[:user] || opts
       end
+
+      def invite_user(opts = {})
+        post "users/invite", user: opts[:user] || opts
+      end
     end
   end
 end
