@@ -47,6 +47,7 @@ module AuthApi
     def destroy
       # Sign out from our session.
       session[:user_uid] = nil
+      session[:user_id] = nil
 
       # Sign out from everywhere.
       redirect_to auth_sign_out_path
