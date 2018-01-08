@@ -32,6 +32,7 @@ module AuthApi
       def self.resolve_resource_and_relationships(data, included)
         return if data.nil?
         (data[:relationships] || {}).each do |k, v|
+          data[:atttibutes] ||= {}
           data[:attributes][k.to_sym] = resolve_relationships(v[:data], included)
         end
         resolve_resource_type(data)
