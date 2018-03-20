@@ -67,7 +67,12 @@ describe AuthApi::Resource::Base do
             created_at: "2017-04-20T11:28:43.000Z",
           }
         }
-      ]
+      ],
+      meta: {
+        event: "user.update",
+        changes: {
+        }
+      }
     }
   end
 
@@ -91,6 +96,11 @@ describe AuthApi::Resource::Base do
     expect(resource).to be_an_instance_of AuthApi::User
     expect(resource.products).to eq []
     expect(resource.registrations).to eq []
+  end
+
+  it "exposes the meta event name to the resource" do
+    resource = described_class.resolve_resources(json)
+    expect(resource.webhook_event).to eq "user.update"
   end
 
 end
