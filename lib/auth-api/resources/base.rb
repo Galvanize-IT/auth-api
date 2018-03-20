@@ -6,48 +6,49 @@ module AuthApi
 
   module Resource
     class Base
-      attr_reader :attributes
+      attr_reader :attributes, :webhook_event
 
       def self.resolve_resources(json)
         json = json.deep_symbolize_keys
         data = json[:data]
         included = resolve_included_resources(json[:included])
+        meta = json[:meta]
 
         if data.is_a?(Array)
-          data.map { |d| resolve_resource_and_relationships(d, included) }
+          data.map { |d| resolve_resource_and_relationships(d, included, meta) }
         else
-          resolve_resource_and_relationships(data, included)
+          resolve_resource_and_relationships(data, included, meta)
         end
       end
 
-      def self.resolve_resource_type(data)
+      def self.resolve_resource_type(data, meta)
         case data[:type]
-        when "users" then User.new(data)
-        when "products" then Product.new(data)
-        when "registrations" then Registration.new(data)
-        when "identities" then Identity.new(data)
+        when "users" then User.new(data, meta)
+        when "products" then Product.new(data, meta)
+        when "registrations" then Registration.new(data, meta)
+        when "identities" then Identity.new(data, meta)
         end
       end
 
-      def self.resolve_resource_and_relationships(data, included)
+      def self.resolve_resource_and_relationships(data, included, meta)
         return if data.nil?
         (data[:relationships] || {}).each do |k, v|
           data[:attributes] ||= {}
-          data[:attributes][k.to_sym] = resolve_relationships(v[:data], included)
+          data[:attributes][k.to_sym] = resolve_relationships(v[:data], included, meta)
         end
-        resolve_resource_type(data)
+        resolve_resource_type(data, meta)
       end
 
-      def self.resolve_relationships(rels, included)
+      def self.resolve_relationships(rels, included, meta)
         return [] if rels.blank?
         if rels.is_a?(Array)
           rels.map do |r|
             included_resources = included[r[:type]]
             next unless included_resources
-            resolve_resource_and_relationships(included_resources[r[:id]], included)
+            resolve_resource_and_relationships(included_resources[r[:id]], included, meta)
           end
         else
-          resolve_resource_and_relationships(included[rels[:type]][rels[:id]], included)
+          resolve_resource_and_relationships(included[rels[:type]][rels[:id]], included, meta)
         end
       end
 
@@ -65,9 +66,10 @@ module AuthApi
         attrs.each { |attr| define_method(attr) { @attributes[attr] ||= [] } }
       end
 
-      def initialize(data = {})
+      def initialize(data = {}, meta = {})
         @id = data[:id]
         @attributes = (data[:attributes] || {}).deep_symbolize_keys
+        @webhook_event = meta[:event] if meta
       end
 
       def attribute_intersection(target, target_to_source = {})
