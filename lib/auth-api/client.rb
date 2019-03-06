@@ -7,6 +7,7 @@ module AuthApi
     API_ENDPOINT = "/api/v1/"
 
     include AuthApi::Endpoints::Products
+    include AuthApi::Endpoints::Users
 
     def self.endpoint(path, params = {})
       uri = URI.parse(AuthApi.configuration.url + API_ENDPOINT + path.gsub(/^\//, ""))
