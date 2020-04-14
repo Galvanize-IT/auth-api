@@ -13,5 +13,5 @@ group :development, :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "database_cleaner"
-  gem "loofah", "~> 2.2.1"
+  gem "loofah", "~> 2.5.0"
 end
