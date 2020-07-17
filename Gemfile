@@ -1,4 +1,4 @@
-ruby "2.4.2"
+ruby "2.6.0"
 source "https://rubygems.org"
 
 gem "rails", ">= 5"
@@ -6,6 +6,7 @@ gem "rails", ">= 5"
 gemspec
 
 group :development, :test do
+  gem "puma", "~> 3.12.0"
   gem "sqlite3"
   gem "rspec-rails"
   gem "vcr"
