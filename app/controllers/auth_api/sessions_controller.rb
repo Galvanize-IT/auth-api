@@ -2,6 +2,10 @@ module AuthApi
   class SessionsController < AuthApi.configuration.inherited_controller
     def new
       # Redirect back to root if signed in, otherwise kick off the defined omniauth strategy.
+      puts "**************** auth api gem ****************"
+      puts "AuthApi::SessionsController#new"
+      puts "params:  #{params.to_json}"
+      puts "**************** auth api gem ****************"
       session[:after_auth_params] = params
       redirect_to current_user ? after_sign_in_path : auth_sign_in_path
     end
@@ -16,12 +20,22 @@ module AuthApi
       # Find and/or optionally create your user.
       auth = request.env["omniauth.auth"]
       unless auth
+        puts "**************** auth api gem ****************"
+        puts "AuthApi::SessionsController#create"
+        puts "request.env[\"omniauth.auth\"]:  #{request.env["omniauth.auth"]}"
+        puts "AuthApi::UserResolutionError: There was an error processing your request type"
+        puts "**************** auth api gem ****************"
         raise AuthApi::UserResolutionError, "There was an error processing your request type"
       end
 
       resource = Resource::Base.resolve_resources(auth.info) if auth.info.data
       user = AuthApi.configuration.user_resolver.call(resource) unless resource.nil?
       unless user&.persisted?
+        puts "**************** auth api gem ****************"
+        puts "AuthApi::SessionsController#create"
+        puts "user not persisted"
+        puts "AuthApi::UserResolutionError: We were unable to find or create a user based on your credentials"
+        puts "**************** auth api gem ****************"
         raise AuthApi::UserResolutionError, "We were unable to find or create a user based on your credentials"
       end
 
@@ -42,6 +56,12 @@ module AuthApi
       # 2. There are some details in params you can use if desired.
       # 3. Put `rescue_from AuthApi::AuthFailure, with: :handle_auth_failure` (and define handle_auth_failure) in your
       #    application controller if you want to handle this.
+
+      puts "**************** auth api gem ****************"
+      puts "AuthApi::SessionsController#failure"
+      puts "params:  #{params.to_json}"
+      puts "**************** auth api gem ****************"
+
       raise AuthApi::AuthFailure, params.to_json
     end
 
