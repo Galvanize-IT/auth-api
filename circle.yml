@@ -1,6 +1,6 @@
 machine:
   ruby:
     version:
-      2.4.2
+      3.0
   environment:
     AWS_DEFAULT_REGION: us-west-2
