@@ -6,7 +6,7 @@ gem "rails", ">= 5"
 gemspec
 
 group :development, :test do
-  gem "puma", "~> 3.12.0"
+  gem "puma", "~> 5.6.2"
   gem "sqlite3"
   gem "rspec-rails"
   gem "vcr"
