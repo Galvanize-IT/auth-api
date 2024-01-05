@@ -16,6 +16,6 @@ Gem::Specification.new do |s|
 
   s.files       = Dir["{app,lib}/**/*"] + ["MIT.LICENSE", "README.md"]
 
-  s.add_dependency "railties", ["< 6"]
-  s.add_dependency "omniauth-oauth2", ["< 1.4.0"]
+  s.add_dependency "railties", ["7.0.8"]
+  s.add_dependency "omniauth-oauth2", ["< 1.7.3"]
 end
