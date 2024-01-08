@@ -5,10 +5,10 @@ module AuthApi
     initializer "auth_api.middleware" do |app|
       config = AuthApi.configuration
       app.config.middleware.use OmniAuth::Builder do
-        provider :galvanize, config.client_id, config.client_secret,
+        provider :galvanize, app.secrets.auth_client_id, app.secrets.auth_client_secret,
           setup: true,
           path_prefix: "#{config.mounted_at}/auth",
-          client_options: { site: config.url }
+          client_options: { site: app.secrets.auth_url }
       end
     end
 
