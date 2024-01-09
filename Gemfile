@@ -6,13 +6,16 @@ gem "rails", "7.0.8"
 gemspec
 
 group :development, :test do
-  gem "puma", "~> 3.12.0"
-  gem "sqlite3"
-  gem "rspec-rails"
-  gem "vcr"
-  gem "webmock"
+  gem "byebug"
   gem "capybara"
-  gem "selenium-webdriver"
   gem "database_cleaner"
   gem "loofah", "~> 2.2.1"
+  gem "puma", "~> 3.12.0"
+  gem "rspec-rails"
+  gem "selenium-webdriver"
+  gem "spring"
+  gem "spring-commands-rspec"
+  gem "sqlite3"
+  gem "vcr"
+  gem "webmock"
 end

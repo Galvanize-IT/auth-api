@@ -1,11 +1,11 @@
 require "features_helper"
 
-describe "Registering", type: :feature do
+describe "Registering", js: true do
   after do
     unstub_auth
   end
 
-  it "allows me to access the system and sign out", js: true do
+  it "allows me to access the system and sign out" do
     stub_auth(uid: "abc123")
     visit(root_path)
 

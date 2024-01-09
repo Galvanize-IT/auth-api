@@ -1,19 +1,21 @@
 require "spec_helper"
 
-def register_chrome_driver(name, headless = false)
-  args = %w[disable-gpu disable-popup-blocking no-sandbox window-size=1920x1920]
-  args << "headless" if headless
-  caps = Selenium::WebDriver::Remote::Capabilities.chrome(chromeOptions: { args: args })
-  Capybara.register_driver name do |app|
-    Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: caps)
-  end
-  name
+# Setup chrome headless driver
+Capybara.server = :puma, { Silent: true }
+Capybara.register_driver :chrome_headless do |app|
+  client = Selenium::WebDriver::Remote::Http::Default.new
+  client.read_timeout = 120
+
+  options = ::Selenium::WebDriver::Chrome::Options.new
+  # options.add_argument('--headless') # comment out to view headed
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
+  options.add_argument('--window-size=1400,1400')
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options, http_client: client)
 end
 
 # register each of the chrome drivers and specify which one
-register_chrome_driver(:chrome, false)
-register_chrome_driver(:headless_chrome, true)
-Capybara.javascript_driver = :headless_chrome
+Capybara.javascript_driver = :chrome_headless
 
 # configure capybara to run on a specific port
 Capybara.server_host = "localhost"
@@ -24,7 +26,10 @@ RSpec.configure do |config|
   config.include Rails.application.routes.url_helpers
   config.use_transactional_fixtures = false
 
-  config.before(:each, type: :feature) do
+  config.include Capybara::DSL
+
+  config.before(:each, type: :system) do
+    driven_by :chrome_headless
     DatabaseCleaner.strategy = Capybara.current_driver == :no_redirects ? :transaction : :truncation
     DatabaseCleaner.start
 
@@ -32,7 +37,16 @@ RSpec.configure do |config|
     Capybara.reset_sessions!
   end
 
-  config.after(:each, type: :feature) do
+  config.before(:each, type: :system, js: true) do
+    driven_by :chrome_headless
+    DatabaseCleaner.strategy = Capybara.current_driver == :no_redirects ? :transaction : :truncation
+    DatabaseCleaner.start
+
+    Capybara.page.driver.reset!
+    Capybara.reset_sessions!
+  end
+
+  config.after(:each, type: :system) do
     Capybara.page.driver.reset!
     Capybara.reset_sessions!
 
