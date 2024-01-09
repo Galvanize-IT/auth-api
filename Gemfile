@@ -1,7 +1,7 @@
 ruby "3.3.0"
 source "https://rubygems.org"
 
-gem "rails", "7.0.8"
+gem "rails", "~> 7.0.8"
 
 gemspec
 
