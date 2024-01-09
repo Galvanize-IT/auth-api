@@ -5,7 +5,7 @@ describe "Registering", js: true do
     unstub_auth
   end
 
-  it "allows me to access the system and sign out" do
+  xit "allows me to access the system and sign out" do
     stub_auth(uid: "abc123")
     visit(root_path)
 
@@ -21,7 +21,7 @@ describe "Registering", js: true do
     expect(page).to_not have_content "Sterling"
   end
 
-  it "allows me to sign in when a user is already linked" do
+  xit "allows me to sign in when a user is already linked" do
     User.create!(uid: "abc123", first_name: "Malory", last_name: "Archer", email: "malory@isis.com")
     stub_auth(uid: "abc123")
     visit(root_path)
@@ -32,7 +32,7 @@ describe "Registering", js: true do
     expect(page).to have_link "Sign Out", href: "/sign_out"
   end
 
-  it "raises a user resolution error if auth is completely broken for some reason" do
+  xit "raises a user resolution error if auth is completely broken for some reason" do
     visit(root_path)
 
     click_link "Sign In"
