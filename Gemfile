@@ -10,7 +10,7 @@ group :development, :test do
   gem "capybara"
   gem "database_cleaner"
   gem "loofah", "~> 2.2.1"
-  gem "puma", "~> 3.12.0"
+  gem "puma", "~> 6.4.2"
   gem "rspec-rails"
   gem "selenium-webdriver"
   gem "spring"
