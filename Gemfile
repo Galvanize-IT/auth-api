@@ -9,7 +9,7 @@ group :development, :test do
   gem "byebug"
   gem "capybara"
   gem "database_cleaner"
-  gem "loofah", "~> 2.2.1"
+  gem "loofah", "~> 2.22.0"
   gem "puma", "~> 3.12.0"
   gem "rspec-rails"
   gem "selenium-webdriver"
