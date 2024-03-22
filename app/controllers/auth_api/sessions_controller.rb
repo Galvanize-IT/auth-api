@@ -51,7 +51,7 @@ module AuthApi
       session[:user_id] = nil
 
       # Sign out from everywhere.
-      redirect_to auth_sign_out_path
+      redirect_to auth_sign_out_path, allow_other_host: true
     end
 
     private
