@@ -1,6 +1,20 @@
-machine:
-  ruby:
-    version:
-      2.4.2
-  environment:
-    AWS_DEFAULT_REGION: us-west-2
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      ruby:
+        version: 3.3.0
+    environment:
+      AWS_DEFAULT_REGION: us-west-2
+    steps:
+      - checkout
+      - run:
+          name: Confirm Ruby version
+          command: ruby -v
+
+workflows:
+  version: 2
+  default:
+    jobs:
+      - build
