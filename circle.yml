@@ -2,9 +2,8 @@ version: 2.1
 
 jobs:
   build:
-    machine:
-      ruby:
-        version: 3.3.0
+    docker:
+      - image: cimg/ruby:3.3.0
     environment:
       AWS_DEFAULT_REGION: us-west-2
     steps:
