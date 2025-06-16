@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     auth-api (0.0.2)
-      bigdecimal (= 1.2.7)
       mutex_m (= 0.2.0)
       omniauth-oauth2 (< 1.7.3)
       railties (= 7.0.8)
@@ -78,7 +77,6 @@ GEM
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
     base64 (0.2.0)
-    bigdecimal (1.2.7)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.39.2)

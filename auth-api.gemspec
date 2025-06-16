@@ -19,5 +19,4 @@ Gem::Specification.new do |s|
   s.add_dependency "railties", ["7.0.8"]
   s.add_dependency "omniauth-oauth2", ["< 1.7.3"]
   s.add_dependency "mutex_m", ["0.2.0"]
-  s.add_dependency "bigdecimal", ["1.2.7"]
 end
